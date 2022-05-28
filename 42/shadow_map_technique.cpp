@@ -1,41 +1,5 @@
 #include "shadow_map_technique.h"
-
-static const char* VS = R"(
-#version 330
-
-layout (location = 0) in vec3 Position;
-layout (location = 1) in vec2 TexCoord;
-layout (location = 2) in vec3 Normal;
-
-out vec2 TexCoord0;
-
-uniform mat4 gWVP;
-
-void main()
-{
-    gl_Position = gWVP * vec4(Position, 1.0);
-    TexCoord0 = TexCoord;
-}
-
-)";
-
-static const char* FS = R"(
-#version 330
-
-uniform sampler2D gShadowMap;
-
-in vec2 TexCoord0;
-
-out vec4 FragColor;
-
-void main()
-{
-    float Depth = texture(gShadowMap, TexCoord0).x;
-//    Depth = 1.0 - (1.0 - Depth) * 25.0;
-    FragColor = vec4(Depth);
-}
-)";
-
+#include "util.h"
 
 ShadowMapTechnique::ShadowMapTechnique()
 {
@@ -47,11 +11,11 @@ bool ShadowMapTechnique::Init()
         return false;
     }
 
-    if (!AddShader(GL_VERTEX_SHADER, VS)) {
+    if (!AddShader(GL_VERTEX_SHADER, "shaders/shadow_map.vs")) {
         return false;
     }
 
-    if (!AddShader(GL_FRAGMENT_SHADER, FS)) {
+    if (!AddShader(GL_FRAGMENT_SHADER, "shaders/shadow_map.fs")) {
         return false;
     }
 

@@ -1,48 +1,24 @@
+/*
+
+	Copyright 2013 Etay Meiri
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
 #include "motion_blur_technique.h"
 #include "util.h"
-
-static const char* VS = R"(
-#version 330
-
-layout (location = 0) in vec3 Position;
-layout (location = 1) in vec2 TexCoord;                                             
-
-out vec2 TexCoord0;
-
-void main()
-{       
-    gl_Position = vec4(Position, 1.0);
-    TexCoord0   = TexCoord;
-})";
-
-static const char* FS = R"(
-#version 330
-
-in vec2 TexCoord0;
-
-uniform sampler2D gColorTexture;
-uniform sampler2D gMotionTexture;
-    
-out vec4 FragColor;
-                                                                                        
-void main()
-{                                    
-    vec2 MotionVector = texture(gMotionTexture, TexCoord0).xy / 2.0;
-
-    vec4 Color = vec4(0.0);
-
-    vec2 TexCoord = TexCoord0;
-    
-    Color += texture(gColorTexture, TexCoord) * 0.4;
-    TexCoord -= MotionVector;
-    Color += texture(gColorTexture, TexCoord) * 0.3;
-    TexCoord -= MotionVector;
-    Color += texture(gColorTexture, TexCoord) * 0.2;
-    TexCoord -= MotionVector;
-    Color += texture(gColorTexture, TexCoord) * 0.1;
-
-    FragColor = Color;
-    })";
 
 MotionBlurTechnique::MotionBlurTechnique()
 {
@@ -55,11 +31,11 @@ bool MotionBlurTechnique::Init()
         return false;
     }
 
-    if (!TXTshader(GL_VERTEX_SHADER, VS)) {
+    if (!AddShader(GL_VERTEX_SHADER, "shaders/motion_blur.vs")) {
         return false;
     }
 
-    if (!TXTshader(GL_FRAGMENT_SHADER, FS)) {
+    if (!AddShader(GL_FRAGMENT_SHADER, "shaders/motion_blur.fs")) {
         return false;
     }
 

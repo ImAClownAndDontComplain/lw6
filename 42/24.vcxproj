@@ -151,6 +151,7 @@
     <ClCompile Include="shadow_map_technique.cpp" />
     <ClCompile Include="technique.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h" />

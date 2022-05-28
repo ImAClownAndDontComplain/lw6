@@ -56,14 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="skinning.fs">
-      <Filter>Исходные файлы</Filter>
-    </None>
-    <None Include="skinning.vs">
-      <Filter>Исходные файлы</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="intermediate_buffer.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>

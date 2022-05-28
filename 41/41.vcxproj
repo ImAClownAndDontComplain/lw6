@@ -154,10 +154,6 @@
     <ClCompile Include="technique.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="skinning.fs" />
-    <None Include="skinning.vs" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="glut_backend.h" />
     <ClInclude Include="intermediate_buffer.h" />

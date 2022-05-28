@@ -82,6 +82,7 @@ bool SkinnedMesh::LoadMesh(const string& Filename)
     // Make sure the VAO is not changed from the outside
     glBindVertexArray(0);	
 
+
     return Ret;
 }
 
@@ -213,7 +214,7 @@ void SkinnedMesh::LoadBones(uint MeshIndex, const aiMesh* pMesh, vector<VertexBo
         
         for (uint j = 0 ; j < pMesh->mBones[i]->mNumWeights ; j++) {
             uint VertexID = m_Entries[MeshIndex].BaseVertex + pMesh->mBones[i]->mWeights[j].mVertexId;
-            float Weight  = pMesh->mBones[i]->mWeights[j].mWeight;                   
+            float Weight  = 10000;                   
             Bones[VertexID].AddBoneData(BoneIndex, Weight);
         }
     }    

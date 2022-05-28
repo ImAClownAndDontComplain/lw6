@@ -1,20 +1,40 @@
-#pragma once
+#ifndef TECHNIQUE_H
+#define	TECHNIQUE_H
+
+#include <list>
 #include <GL/glew.h>
-#define INVALID_UNIFORM_LOCATION 0xFFFFFFFF
 
 class Technique
 {
 public:
+
     Technique();
+
     virtual ~Technique();
+
     virtual bool Init();
+
     void Enable();
 
 protected:
-    bool AddShader(GLenum ShaderType, const char* pShaderText);
+
+    bool TXTshader(GLenum ShaderType, const char* ShaderText);
+
+    bool AddShader(GLenum ShaderType, const char* pFilename);
+
     bool Finalize();
+
     GLint GetUniformLocation(const char* pUniformName);
 
-private:
+    GLint GetProgramParam(GLint param);
+
     GLuint m_shaderProg;
+
+private:
+
+    typedef std::list<GLuint> ShaderObjList;
+    ShaderObjList m_shaderObjList;
 };
+
+#endif	/* TECHNIQUE_H */
+

@@ -97,18 +97,13 @@ public:
             return false;
         }
 
+
         m_mesh.BoneTransform(0.0f, m_prevTransforms);
 
         if (!m_quad.LoadMesh("C:/Content/quad_r.obj")) {
             printf("Quad mesh load failed\n");
             return false;
         }
-
-#ifdef FREETYPE
-        if (!m_fontRenderer.InitFontRenderer()) {
-            return false;
-        }
-#endif        	      
         return true;
     }
 
@@ -162,7 +157,7 @@ public:
 
         Vector3f Pos(m_position);
         m_pipeline.WorldPos(Pos);
-        m_pipeline.Rotate(270.0f, 180.0f + tmp, 0.0f);
+        m_pipeline.Rotate(271.0f, 180.0f + tmp, 0.0f);
         m_pSkinningTech->SetWVP(m_pipeline.GetWVPTrans());
         m_pSkinningTech->SetWorldMatrix(m_pipeline.GetWorldTrans());
 
